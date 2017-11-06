@@ -11,6 +11,7 @@ void readStudentFile() {
     int c;
     struct student studentArray[ARRAY_SIZE];
     int i = 0;
+    int numberOfElementsInArray = 0;
     char buffer[250];
     int bufferIndex = 0;
     FILE* studentFile = fopen("students.csv", "r");
@@ -30,6 +31,7 @@ void readStudentFile() {
                 studentArray[i] = splitData(buffer);
                 printf("%s", buffer);
                 i++;
+                numberOfElementsInArray++;
                 bufferIndex = 0;
             }
         }
