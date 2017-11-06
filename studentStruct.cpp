@@ -1,11 +1,24 @@
 #include <cstdlib>
 #include <cstdio>
-#include "main.h"
-#include "bubbleSort.cpp"
+#include "studentStruct.h"
+
 
 const int ARRAY_SIZE = 5;
 
 struct student splitData(const char[]);
+
+void bubbleSort(student *array, int elemente) {
+    int i;
+    student temp;
+
+    while(elemente--)
+        for(i = 1; i <= elemente; i++)
+            if(array[i-1].notenSchnitt > array[i].notenSchnitt) {
+                temp=array[i];
+                array[i]=array[i-1];
+                array[i-1]=temp;
+            }
+}
 
 void readStudentFile() {
     int c;
@@ -36,6 +49,17 @@ void readStudentFile() {
             }
         }
     }
+
+    bubbleSort(studentArray, numberOfElementsInArray);
+    printf("\n\nNach dem Sortieren\n");
+    for (student student : studentArray) {
+        printf("Vorname %s\n", studentArray->vorname);
+        printf("Name %s\n", studentArray->name);
+        printf("Matrikelnummer %d\n", studentArray->matrikelnummer);
+        printf("Datum %s\n", studentArray->date);
+        printf("Notendurchschnitt %f\n", studentArray->notenSchnitt);
+    }
+
 }
 
 void copyString(char *string, const char stringToCopy[], int size) {

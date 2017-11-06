@@ -2,13 +2,15 @@
 // Created by Florian on 06.11.2017.
 //
 
-void bubble(float *array, int elemente) {
+#include "studentStruct.h"
+
+void bubble(student *array, int elemente) {
     int i;
-    float temp;
+    student temp;
 
     while(elemente--)
         for(i = 1; i <= elemente; i++)
-            if(array[i-1] > array[i]) {
+            if(array[i-1].notenSchnitt > array[i].notenSchnitt) {
                 temp=array[i];
                 array[i]=array[i-1];
                 array[i-1]=temp;
