@@ -4,9 +4,9 @@
 
 #include "main.h"
 
-void bubble(student *array, int elemente) {
+void bubbleSortAlgorithm(student *array, int elemente) {
     int i;
-    student temp;
+    student temp{};
 
     while(elemente--)
         for(i = 1; i <= elemente; i++)

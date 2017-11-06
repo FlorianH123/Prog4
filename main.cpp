@@ -59,8 +59,8 @@ void readStudentFile() {
 
     bubbleSort(studentArray, numberOfElementsInArray);
     printf("\n\nNach dem Sortieren\n");
-    for (int i = 0 ; i < numberOfElementsInArray ; i++) {
-        printStudent(studentArray[i]);
+    for (int j = 0 ; j < numberOfElementsInArray ; j++) {
+        printStudent(studentArray[j]);
     }
 
 }
