@@ -94,7 +94,7 @@ void readCharArrayToFloat(float *number, const char *string, int sizeToRead, int
     }
     (*bufferPointer)++;
     buffer[i] = '\0';
-    *number = atof(buffer);
+    *number = static_cast<float>(atof(buffer));
 }
 
 void readCharArrayToCharArray(char *string, const char *stringArray, int sizeToRead, int *bufferPointer) {
