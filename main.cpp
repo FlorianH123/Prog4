@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include "main.h"
+#include "bubbleSort.cpp"
 
 const int ARRAY_SIZE = 5;
 
