@@ -1,14 +1,14 @@
 #include <cstdlib>
 #include <cstdio>
 #include <cstring>
+#include <main.h>
 
-struct student {
-    int matrikelnummer;
-    char name[50];
-    char vorname[50];
-    char date[15];
-    float notenSchnitt;
-};
+void splitData(char buffer[]) {
+    char data[250];
+    int index = 0;
+
+
+}
 
 void readStudentFile() {
     int c;
@@ -17,7 +17,7 @@ void readStudentFile() {
     int bufferIndex = 0;
     FILE* studentFile = fopen("C:\\Users\\Florian\\CLionProjects\\Uebung1\\students.csv", "r");
 
-    if (studentFile == NULL) {
+    if (studentFile == nullptr) {
         perror("Datei konnte nicht geoeffnet werden!\n");
     } else {
         while (c != EOF) {
@@ -28,12 +28,10 @@ void readStudentFile() {
 
             if (c == '\n') {
                 buffer[bufferIndex] = '\0';
+
+                splitData(buffer);
                 printf("%s", buffer);
                 bufferIndex = 0;
-
-                //memset(buffer, ' ', 249);
-
-                //printf("%s", buffer);
             }
         }
     }
