@@ -2,11 +2,14 @@
 #include <cstdio>
 #include "main.h"
 
-void splitData(const char[]);
+const int ARRAY_SIZE = 5;
+
+struct student splitData(const char[]);
 
 void readStudentFile() {
     int c;
-    int n = 0;
+    struct student studentArray[ARRAY_SIZE];
+    int i = 0;
     char buffer[250];
     int bufferIndex = 0;
     FILE* studentFile = fopen("students.csv", "r");
@@ -23,8 +26,9 @@ void readStudentFile() {
             if (c == '\n') {
                 buffer[bufferIndex] = '\0';
 
-                splitData(buffer);
+                studentArray[i] = splitData(buffer);
                 printf("%s", buffer);
+                i++;
                 bufferIndex = 0;
             }
         }
@@ -76,7 +80,7 @@ void readCharArrayToCharArray(char *string, const char *stringArray, int sizeToR
     copyString(string, buffer, sizeToRead);
 }
 
-void splitData(const char studentString[]) {
+struct student splitData(const char studentString[]) {
     struct student student1;
     char *vornamePointer, *namePointer, *datePointer;
     int studentStringPointer = 0;
@@ -96,6 +100,7 @@ void splitData(const char studentString[]) {
     readCharArrayToFloat(&student1.notenSchnitt, studentString, 4, &studentStringPointer);
     printf("Schnit: %f\n", student1.notenSchnitt);
 
+    return student1;
 }
 
 int main() {
