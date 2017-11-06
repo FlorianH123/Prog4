@@ -2,7 +2,7 @@
 // Created by Florian on 06.11.2017.
 //
 
-#include "studentStruct.h"
+#include "main.h"
 
 void bubble(student *array, int elemente) {
     int i;

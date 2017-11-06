@@ -1,15 +1,23 @@
 #include <cstdlib>
 #include <cstdio>
-#include "studentStruct.h"
+#include "main.h"
 
 
 const int ARRAY_SIZE = 5;
 
 struct student splitData(const char[]);
 
+void printStudent(student aStudent) {
+    printf("Vorname %s\n", aStudent.vorname);
+    printf("Name %s\n", aStudent.name);
+    printf("Matrikelnummer %d\n", aStudent.matrikelnummer);
+    printf("Datum %s\n", aStudent.date);
+    printf("Notendurchschnitt %.2f\n", aStudent.notenSchnitt);
+}
+
 void bubbleSort(student *array, int elemente) {
     int i;
-    student temp;
+    student temp{};
 
     while(elemente--)
         for(i = 1; i <= elemente; i++)
@@ -21,7 +29,7 @@ void bubbleSort(student *array, int elemente) {
 }
 
 void readStudentFile() {
-    int c;
+    int c = 0;
     struct student studentArray[ARRAY_SIZE];
     int i = 0;
     int numberOfElementsInArray = 0;
@@ -35,14 +43,13 @@ void readStudentFile() {
         while (c != EOF) {
             c = fgetc(studentFile);
 
-            buffer[bufferIndex] = c;
+            buffer[bufferIndex] = static_cast<char>(c);
             bufferIndex++;
 
             if (c == '\n') {
                 buffer[bufferIndex] = '\0';
 
                 studentArray[i] = splitData(buffer);
-                printf("%s", buffer);
                 i++;
                 numberOfElementsInArray++;
                 bufferIndex = 0;
@@ -52,12 +59,8 @@ void readStudentFile() {
 
     bubbleSort(studentArray, numberOfElementsInArray);
     printf("\n\nNach dem Sortieren\n");
-    for (student student : studentArray) {
-        printf("Vorname %s\n", studentArray->vorname);
-        printf("Name %s\n", studentArray->name);
-        printf("Matrikelnummer %d\n", studentArray->matrikelnummer);
-        printf("Datum %s\n", studentArray->date);
-        printf("Notendurchschnitt %f\n", studentArray->notenSchnitt);
+    for (int i = 0 ; i < numberOfElementsInArray ; i++) {
+        printStudent(studentArray[i]);
     }
 
 }
@@ -108,7 +111,7 @@ void readCharArrayToCharArray(char *string, const char *stringArray, int sizeToR
 }
 
 struct student splitData(const char studentString[]) {
-    struct student student1;
+    struct student student1{};
     char *vornamePointer, *namePointer, *datePointer;
     int studentStringPointer = 0;
 
@@ -117,15 +120,12 @@ struct student splitData(const char studentString[]) {
     datePointer = student1.date;
 
     readCharArrayToInt(&student1.matrikelnummer, studentString, 10, &studentStringPointer);
-    printf("Matrikelnummer: %d\n", student1.matrikelnummer);
     readCharArrayToCharArray(vornamePointer, studentString, 50, &studentStringPointer);
-    printf("Vorname: %s\n", student1.vorname);
     readCharArrayToCharArray(namePointer, studentString, 50, &studentStringPointer);
-    printf("Name: %s\n", student1.name);
     readCharArrayToCharArray(datePointer, studentString, 15, &studentStringPointer);
-    printf("Datum: %s\n", student1.date);
     readCharArrayToFloat(&student1.notenSchnitt, studentString, 4, &studentStringPointer);
-    printf("Schnit: %f\n", student1.notenSchnitt);
+
+    printStudent(student1);
 
     return student1;
 }
