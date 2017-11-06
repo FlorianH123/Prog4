@@ -59,11 +59,21 @@ void readStudentFile() {
         }
     }
 
-    bubbleSort(studentArray, numberOfElementsInArray);
-    printf("\n\nNach dem Sortieren\n");
+    printf("<-- Vor dem Sortieren -->");
     for (int j = 0 ; j < numberOfElementsInArray ; j++) {
+        printf("\n");
         printStudent(studentArray[j]);
     }
+    printf("<-- ------------- -->\n");
+
+    bubbleSort(studentArray, numberOfElementsInArray);
+
+    printf("\n\n<-- Nach dem Sortieren -->");
+    for (int j = 0 ; j < numberOfElementsInArray ; j++) {
+        printf("\n");
+        printStudent(studentArray[j]);
+    }
+    printf("<-- ------------- -->\n");
 
 }
 
@@ -126,8 +136,6 @@ struct student splitData(const char studentString[]) {
     readCharArrayToCharArray(namePointer, studentString, 50, &studentStringPointer);
     readCharArrayToCharArray(datePointer, studentString, 15, &studentStringPointer);
     readCharArrayToFloat(&student1.notenSchnitt, studentString, 4, &studentStringPointer);
-
-    printStudent(student1);
 
     return student1;
 }
