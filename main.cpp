@@ -15,6 +15,27 @@ void printStudent(student aStudent) {
     printf("Notendurchschnitt %.2f\n", aStudent.notenSchnitt);
 }
 
+bool isStudentValide(struct student *student) {
+    if (student -> notenSchnitt == 0) {
+        return false;
+    }
+
+    if (student -> date[0] == '\0') {
+        return false;
+    }
+
+    if (student -> vorname[0] == '\0') {
+        return false;
+    }
+
+    if (student -> name[0] == '\0') {
+        return false;
+    }
+
+    return student -> matrikelnummer != 0.0;
+
+}
+
 void bubbleSort(student *array, int elemente) {
     int i;
     student temp{};
@@ -50,10 +71,14 @@ void readStudentFile() {
 
             if (c == '\n') {
                 buffer[bufferIndex] = '\0';
-
-                studentArray[i] = splitData(buffer);
-                i++;
-                numberOfElementsInArray++;
+                printf("%s\n", buffer);
+                struct student student = splitData(buffer);
+                if (isStudentValide(&student)) {
+                    printf("Richtig\n");
+                    studentArray[i] = student;
+                    i++;
+                    numberOfElementsInArray++;
+                }
                 bufferIndex = 0;
             }
         }
@@ -112,7 +137,7 @@ void readCharArrayToFloat(float *number, const char *string, int sizeToRead, int
 void readCharArrayToCharArray(char *string, const char *stringArray, int sizeToRead, int *bufferPointer) {
     int i = 0;
     char buffer[sizeToRead + 1];
-    while (i < sizeToRead && stringArray[*bufferPointer] != '\0' && stringArray[*bufferPointer] != ';') {
+    while (i < sizeToRead && stringArray[*bufferPointer] != '\0' && stringArray[*bufferPointer] != '\n' && stringArray[*bufferPointer] != ';') {
         buffer[i] = stringArray[*bufferPointer];
         (*bufferPointer)++;
         i++;
@@ -122,22 +147,32 @@ void readCharArrayToCharArray(char *string, const char *stringArray, int sizeToR
     copyString(string, buffer, sizeToRead);
 }
 
+void initializeStudent(struct student *student) {
+    student -> matrikelnummer = 0;
+    student -> notenSchnitt = 0.0;
+    student -> name[0] = '\0';
+    student -> date[0] = '\0';
+    student -> vorname[0] = '\0';
+}
+
 struct student splitData(const char studentString[]) {
-    struct student student1{};
+    struct student student{};
     char *vornamePointer, *namePointer, *datePointer;
     int studentStringPointer = 0;
 
-    vornamePointer = student1.vorname;
-    namePointer = student1.name;
-    datePointer = student1.date;
+    initializeStudent(&student);
 
-    readCharArrayToInt(&student1.matrikelnummer, studentString, 10, &studentStringPointer);
+    vornamePointer = student.vorname;
+    namePointer = student.name;
+    datePointer = student.date;
+
+    readCharArrayToInt(&student.matrikelnummer, studentString, 10, &studentStringPointer);
     readCharArrayToCharArray(vornamePointer, studentString, 50, &studentStringPointer);
     readCharArrayToCharArray(namePointer, studentString, 50, &studentStringPointer);
     readCharArrayToCharArray(datePointer, studentString, 15, &studentStringPointer);
-    readCharArrayToFloat(&student1.notenSchnitt, studentString, 4, &studentStringPointer);
+    readCharArrayToFloat(&student.notenSchnitt, studentString, 4, &studentStringPointer);
 
-    return student1;
+    return student;
 }
 
 int main() {
