@@ -1,6 +1,6 @@
 #include <cstdlib>
 #include <cstdio>
-#include "main.h"
+#include "studentStruct.h"
 
 
 const int ARRAY_SIZE = 5;

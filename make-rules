@@ -1,0 +1,49 @@
+# Eigene Regeln zum �bersetzen von C- und C++-Programmen
+# Autor: Folz
+# 2012/2015(korrigiert)
+
+# C++-Compiler
+CXX = g++
+# C-Compiler
+CC = gcc
+
+LOESCHLISTE = *.o *.exe *~ *stackdump
+
+clean:
+	@echo "Folgende Dateien werden geloescht"
+	@echo $(LOESCHLISTE)
+	rm -f *.o *.exe *~ *stackdump
+
+
+### Einfache Regeln f�r die C++-Programmierung
+# Regel, um aus .cpp-Dateien .o-Dateien zu erzeugen
+# $< ist die erste Abh�ngigkeit
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(CFLAGS) -c $<
+
+# Regel, um aus .cpp-Dateien eine ausf�hrbare Datei zu erzeugen
+# $@ ist das zu erzeugende Ziel
+# $^ ist die Liste aller Abh�ngigkeiten dieses Ziels
+%: %.cpp
+	$(CXX)  $(CXXFLAGS) $(CFLAGS) $(LDFLAGS) -o $@ $^
+
+### Einfache Regeln f�r die C-Programmierung
+
+# Regel, um aus .c-Dateien .o-Dateien zu erzeugen
+# $< ist die erste Abh�ngigkeit
+%.o: %.c
+	$(CC) $(CFLAGS) -c $<
+
+# Regel, um aus .o-Dateien eine ausf�hrbare Datei zu erzeugen
+# $@ ist das zu erzeugende Ziel
+# $^ ist die Liste aller Abh�ngigkeiten dieses Ziels
+%: %.o
+	$(LD) $(LDFLAGS) -o $@ $^
+
+
+# Regel, um aus .c-Dateien eine ausf�hrbare Datei zu erzeugen
+# $@ ist das zu erzeugende Ziel
+# $^ ist die Liste aller Abh�ngigkeiten dieses Ziels
+%: %.c
+	$(CC) $(CFLAGS) -o $@ $^
+

@@ -2,7 +2,7 @@
 // Created by Florian on 06.11.2017.
 //
 
-#include "main.h"
+#include "studentStruct.h"
 
 void bubbleSortAlgorithm(student *array, int elemente) {
     int i;
@@ -17,3 +17,6 @@ void bubbleSortAlgorithm(student *array, int elemente) {
             }
 }
 
+int main() {
+
+}
