@@ -17,6 +17,3 @@ void bubbleSortAlgorithm(student *array, int elemente) {
             }
 }
 
-int main() {
-
-}

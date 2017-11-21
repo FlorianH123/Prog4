@@ -1,12 +1,16 @@
 #include <cstdlib>
 #include <cstdio>
 #include "studentStruct.h"
-
+#include "bubbleSort.cpp"
 
 const int ARRAY_SIZE = 5;
 
 struct student splitData(const char[]);
 
+/**
+ * Methode um ein Studenten auszugeben
+ * @param aStudent
+ */
 void printStudent(student aStudent) {
     printf("Vorname %s\n", aStudent.vorname);
     printf("Name %s\n", aStudent.name);
@@ -15,6 +19,11 @@ void printStudent(student aStudent) {
     printf("Notendurchschnitt %.2f\n", aStudent.notenSchnitt);
 }
 
+/**
+ * Methode um zu überprüfen, ob ein Student valide ist
+ * @param student ein Student
+ * @return true wenn valide sonst false
+ */
 bool isStudentValide(struct student *student) {
     if (student -> notenSchnitt == 0) {
         return false;
@@ -36,21 +45,9 @@ bool isStudentValide(struct student *student) {
 
 }
 
-void bubbleSort(student *array, int elemente) {
-    int i;
-    student temp{};
-
-    while((elemente--) > 0) {
-        for (i = 1; i <= elemente; i++) {
-            if (array[i - 1].notenSchnitt > array[i].notenSchnitt) {
-                temp = array[i];
-                array[i] = array[i - 1];
-                array[i - 1] = temp;
-            }
-        }
-    }
-}
-
+/**
+ * Methode um Studenten von einer Datei einzulesen
+ */
 void readStudentFile() {
     int c = 0;
     struct student studentArray[ARRAY_SIZE];
@@ -91,7 +88,7 @@ void readStudentFile() {
     }
     printf("<-- ------------- -->\n");
 
-    bubbleSort(studentArray, numberOfElementsInArray);
+    bubbleSortAlgorithm(studentArray, numberOfElementsInArray);
 
     printf("\n\n<-- Nach dem Sortieren -->");
     for (int j = 0 ; j < numberOfElementsInArray ; j++) {
@@ -102,12 +99,25 @@ void readStudentFile() {
 
 }
 
+/**
+ * Kopiert ein char Array in ein anderes
+ * @param string neues Array
+ * @param stringToCopy altes Array
+ * @param size Größe des Arrays
+ */
 void copyString(char *string, const char stringToCopy[], int size) {
     for (int i = 0; i < size; i++) {
         string[i] = stringToCopy[i];
     }
 }
 
+/**
+ * Konvertiert ein char Array in ein int
+ * @param number
+ * @param string
+ * @param sizeToRead
+ * @param bufferPointer
+ */
 void readCharArrayToInt(int *number, const char *string, int sizeToRead, int *bufferPointer) {
     int i = 0;
     char buffer[sizeToRead + 1];
@@ -121,6 +131,13 @@ void readCharArrayToInt(int *number, const char *string, int sizeToRead, int *bu
     *number = atoi(buffer);
 }
 
+/**
+ * Konvertiert ein char Array in ein float
+ * @param number
+ * @param string
+ * @param sizeToRead
+ * @param bufferPointer
+ */
 void readCharArrayToFloat(float *number, const char *string, int sizeToRead, int *bufferPointer) {
     int i = 0;
     char buffer[sizeToRead + 1];
@@ -147,6 +164,10 @@ void readCharArrayToCharArray(char *string, const char *stringArray, int sizeToR
     copyString(string, buffer, sizeToRead);
 }
 
+/**
+ * Initialisisert das Student struct
+ * @param student
+ */
 void initializeStudent(struct student *student) {
     student -> matrikelnummer = 0;
     student -> notenSchnitt = 0.0;
@@ -155,6 +176,11 @@ void initializeStudent(struct student *student) {
     student -> vorname[0] = '\0';
 }
 
+/**
+ * Teilt den Studenten String in Teilstrings
+ * @param studentString
+ * @return
+ */
 struct student splitData(const char studentString[]) {
     struct student student{};
     char *vornamePointer, *namePointer, *datePointer;
