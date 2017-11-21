@@ -68,13 +68,15 @@ void readStudentFile() {
 
             if (c == '\n') {
                 buffer[bufferIndex] = '\0';
-                printf("%s\n", buffer);
+                printf("%s", buffer);
                 struct student student = splitData(buffer);
                 if (isStudentValide(&student)) {
-                    printf("Richtig\n");
+                    printf("Richtig\n\n");
                     studentArray[i] = student;
                     i++;
                     numberOfElementsInArray++;
+                } else {
+                    printf ("Falsch\n\n");
                 }
                 bufferIndex = 0;
             }
