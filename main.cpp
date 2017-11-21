@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include "studentStruct.h"
-#include "bubbleSort.cpp"
+#include "bubbleSort.h"
 
 const int ARRAY_SIZE = 5;
 

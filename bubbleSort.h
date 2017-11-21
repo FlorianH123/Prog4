@@ -1,9 +1,11 @@
 //
-// Created by Florian on 06.11.2017.
+// Created by Florian on 21.11.2017.
 //
 
-#include "studentStruct.h"
+#ifndef UEBUNG1_BUBBLESORT_H
+#define UEBUNG1_BUBBLESORT_H
 
+#include "studentStruct.h"
 void bubbleSortAlgorithm(student *array, int elemente) {
     int i;
     student temp{};
@@ -14,6 +16,8 @@ void bubbleSortAlgorithm(student *array, int elemente) {
                 temp=array[i];
                 array[i]=array[i-1];
                 array[i-1]=temp;
+                
             }
 }
 
+#endif //UEBUNG1_BUBBLESORT_H

@@ -1,6 +1,6 @@
 CXXFLAGS =  -g -std=c++17 -pedantic -Wall
 
-all: bubbleSort main
+all: bubbleSort.h studentStruct.h main
 		
 version:
 	g++ --version

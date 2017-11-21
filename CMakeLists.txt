@@ -3,5 +3,5 @@ project(Uebung1)
 
 set(CMAKE_CXX_STANDARD 17)
 
-set(SOURCE_FILES studentStruct.h bubbleSort.cpp main.cpp)
+set(SOURCE_FILES studentStruct.h main.cpp bubbleSort.h)
 add_executable(Uebung1 ${SOURCE_FILES})
